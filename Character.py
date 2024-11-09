@@ -1,8 +1,9 @@
+import random
 class Character():
-    def __init__(self,name,health,strenght):
+    def __init__(self, name, health, age):
         self.name = name
         self.health = health
-        self.strenght = strenght
+        self.age = age
         self.inventory = []
 
     def take_item(self,item):
@@ -15,29 +16,48 @@ class Character():
         else:
             print(f'У {self.name} нет {item}')
 
-    def attack(self,other):
-        dmg = self.strenght
-        other.health -= dmg
-        print(f'{self.name} нанес {other.name} {dmg} урона! У {other.name} осталось {other.health} HP')
+class Swordsman(Character):
+    def __init__(self,name,health,age,damage):
+        super().__init__(self, name, health, age)
+        self.damage = damage
+
+    def swordsman_attack(self,target):
+        dmg = self.damage
+        target.health -= dmg
+        print(f'{self.name} нанес {target.name} {dmg} урона! У {target.name} осталось {target.health} HP')
 
 class Mage(Character):
-    def __int__(self,name,health,strenght,mana):
-        super().__init__(self,name,health,strenght)
+    def __init__(self,name,health,age,mana):
+        super().__init__(self,name,health,age)
         self.mana = mana
 
-    def cast_navik(self,minus_mana):
-        self.mana -= minus_mana
-        print(f'{self.name} использует заклинание, расходуя {minus_mana} маны (Остал. {self.mana})')
+    def mage_attack(self):
+        mana = self.mana - 35
+        print(f'{self.name} использует навык! (ост. {mana} маны')
 
-class Varvor(Character):
-    def __int__(self,name,health,strenght,yarost):
-        super().__init__(self,name,health,strenght)
-        self.yarost = yarost
+class Cleymor(Character):
+    def __init__(self,name,health,age,damage,power):
+        super().__init__(self,name,health,age)
+        self.power = power
+        self.damage = damage
 
-    def attack(self,yarost,other):
-        dmg = self.strenght
-        other.health -= dmg * yarost
-        print(f'{self.name} нанес {other.name} {dmg} урона! (Бонус {yarost}!). У {other} осталось {other.health} HP')
+    def cleymor_attack(self,target):
+        dmg = self.damage * self.power
+        target.health -= dmg
+        print(f'{self.name} нанес {target.name} {dmg} урона (x1.2)! У {target.name} осталось {target.health} HP')
+
+class Archer(Character):
+    def __init__(self,name,health,age,damage,accuracy):
+        super().__init__(self,name,health,age)
+        self.accuracy = accuracy
+        self.damage = damage
+
+    def archer_attack(self,target):
+        num = random.randint(1,100)
+        if num > self.accuracy:
+            dmg = self.damage * 1.5
+        target.health -= dmg
+        print(f'{self.name} нанес {target.name} {dmg} урона(!!!) (точн. 50)! У {target.name} осталось {target.health} HP')
 
 
 
@@ -48,10 +68,14 @@ class Item():
         self.name = name
         self.value = value
 
-person = Character('Аято',100,15)
-person2 = Character('Райден',50,40)
-mage = Mage('Эмилия',70,40,100)
-varvor = Varvor('Итто',150,30)
-
+person1 = Character('Аято',100,27)
+# swordsman1 = Swordsman('Райден',100,33,40)
+mage1 = Mage('Эмилия',80,22,100)
+cleymor1 = Cleymor('Итто',150,40,100,1.2)
+archer1 = Archer('Фишль',100,90,80,50)
+# swordsman1.swordsman_attack(mage1)
 
 #sword = Item('sword',20)
+
+
+

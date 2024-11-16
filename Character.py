@@ -1,9 +1,9 @@
+
 import random
 class Character():
-    def __init__(self, name, health, age):
+    def __init__(self, name, health):
         self.name = name
         self.health = health
-        self.age = age
         self.inventory = []
 
     def take_item(self,item):
@@ -17,65 +17,85 @@ class Character():
             print(f'У {self.name} нет {item}')
 
 class Swordsman(Character):
-    def __init__(self,name,health,age,damage):
-        super().__init__(self, name, health, age)
+    def __init__(self,name,health,damage):
+        super().__init__(name, health)
         self.damage = damage
 
     def swordsman_attack(self,target):
-        dmg = self.damage
-        target.health -= dmg
-        print(f'{self.name} нанес {target.name} {dmg} урона! У {target.name} осталось {target.health} HP')
+        if self.health > 0:
+            dmg = self.damage
+            target.health-=dmg
+            print(f'{self.name} нанес {target.name} {dmg} урона! У {target.name} осталось {target.health} HP')
+        else:
+            print(f'{self.name} мертв.')
 
 class Mage(Character):
-    def __init__(self,name,health,age,mana):
-        super().__init__(self,name,health,age)
+    def __init__(self,name,health,mana):
+        super().__init__(name,health)
         self.mana = mana
 
     def mage_attack(self):
-        mana = self.mana - 35
-        print(f'{self.name} использует навык! (ост. {mana} маны')
+        if self.health > 0:
+            mana = self.mana - 35
+            print(f'{self.name} использует навык! (ост. {mana} маны)')
+        else:
+            print(f'{self.name} мертв.')
 
 class Cleymor(Character):
-    def __init__(self,name,health,age,damage,power):
-        super().__init__(self,name,health,age)
+    def __init__(self,name,health,damage,power):
+        super().__init__(name,health)
         self.power = power
         self.damage = damage
 
     def cleymor_attack(self,target):
-        dmg = self.damage * self.power
-        target.health -= dmg
-        print(f'{self.name} нанес {target.name} {dmg} урона (x1.2)! У {target.name} осталось {target.health} HP')
-
+        if self.health > 0:
+            dmg = self.damage * self.power
+            target.health -= dmg
+            print(f'{self.name} нанес {target.name} {dmg} урона (x1.2)! У {target.name} осталось {target.health} HP')
+        else:
+            print(f'{self.name} мертв.')
 class Archer(Character):
-    def __init__(self,name,health,age,damage,accuracy):
-        super().__init__(self,name,health,age)
+    def __init__(self,name,health,damage,accuracy):
+        super().__init__(name,health)
         self.accuracy = accuracy
         self.damage = damage
 
     def archer_attack(self,target):
-        num = random.randint(1,100)
-        if num > self.accuracy:
-            dmg = self.damage * 1.5
-        target.health -= dmg
-        print(f'{self.name} нанес {target.name} {dmg} урона(!!!) (точн. 50)! У {target.name} осталось {target.health} HP')
-
-
-
+        if self.health > 0:
+            num = random.randint(1,100)
+            dmg = self.damage
+            if num > self.accuracy:
+               dmg = dmg * 1.5
+               target.health -= dmg
+               print(f'{self.name} нанес {target.name} {dmg} урона(!!!) (точн. 50)! У {target.name} осталось {target.health} HP')
+            else:
+               target.health -= dmg
+               print(f'{self.name} нанес {target.name} {dmg} урона (точн. 50)! У {target.name} осталось {target.health} HP')
+        else:
+            print(f'{self.name} мертв.')
 
 
 class Item():
     def __init__(self,name,value):
         self.name = name
         self.value = value
-
-person1 = Character('Аято',100,27)
-# swordsman1 = Swordsman('Райден',100,33,40)
-mage1 = Mage('Эмилия',80,22,100)
-cleymor1 = Cleymor('Итто',150,40,100,1.2)
-archer1 = Archer('Фишль',100,90,80,50)
-# swordsman1.swordsman_attack(mage1)
-
-#sword = Item('sword',20)
+        self.effect = random.randint(-50,50)
 
 
 
+
+
+
+
+person1 = Character('Аято',100)
+swordsman1 = Swordsman('Райден',100,20)
+mage1 = Mage('Эмилия',80,100)
+cleymor1 = Cleymor('Итто',150,30,1.2)
+archer1 = Archer('Фишль',75,80,50)
+
+
+
+
+
+
+#действия

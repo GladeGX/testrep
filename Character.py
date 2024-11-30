@@ -1,4 +1,5 @@
 import random
+import time
 class Character():
     def __init__(self, name, health,):
         self.name = name
@@ -15,6 +16,10 @@ class Character():
             print(f'{self.name} выбросил {item}')
         else:
             print(f'У {self.name} нет {item}')
+
+    def monster_kill(self,target):
+        if target.health <= 0:
+            print(f'{target.name} мертв.')
 
     def use_item(self,item):
         if item in self.inventory:
@@ -33,6 +38,8 @@ class Character():
 
 
 
+
+
 class Swordsman(Character):
     def __init__(self,name,health,damage):
         super().__init__(name, health)
@@ -45,7 +52,7 @@ class Swordsman(Character):
             print(f'{self.name} нанес {target.name} {dmg} урона! У {target.name} осталось {target.health} HP')
         else:
             print(f'{self.name} мертв.')
-
+        self.monster_kill(target)
 class Mage(Character):
     def __init__(self,name,health,mana):
         super().__init__(name,health)
@@ -84,10 +91,10 @@ class Archer(Character):
             if num > self.accuracy:
                dmg = dmg * 1.5
                target.health -= dmg
-               print(f'{self.name} нанес {target.name} {dmg} урона(!!!) (точн. 50)! У {target.name} осталось {target.health} HP')
+               print(f'{self.name} нанес {target.name} {dmg} урона(!!!) (точн. {self.accuracy})! У {target.name} осталось {target.health} HP')
             else:
                target.health -= dmg
-               print(f'{self.name} нанес {target.name} {dmg} урона (точн. 50)! У {target.name} осталось {target.health} HP')
+               print(f'{self.name} нанес {target.name} {dmg} урона (точн. {self.accuracy})! У {target.name} осталось {target.health} HP')
         else:
             print(f'{self.name} мертв.')
 
@@ -119,17 +126,26 @@ def main_story():
     print('Но однажды,в нем началась катастрофа. Желая покинуть его,на границе с небесами тебе заградило путь Божество. Твои силы не могли сравниться с силами Безымяной Богини,и ты проиграл.')
     print('Очнувшись спустя время,ты не обнаружил ни своего врага,ни разрушений,вызваными катастрофой,ни своих сил и умений.Сколько лет прошло,где твои силы,и как тебе выбраться? Пусть за это время,твое имя навсегда останется в истории этого мира.')
     name = input('Введи свое имя')
-    print('По какому пути последуешь?')
-    print('Выбери цифру: 1)Мечник   2)Маг   3)Двуручник   4)Стрелок')
-    num = int(input(''))
-    if num == 1:
-        player = Swordsman(name, 100, 35)
-        print(f'Тебя зовут {name}, ты-Мечник!'
-              f'Твое HP {player.health}. Твой урон - {player.damage}')
+    print(f'Тебя зовут {name}. Ты - Мечник!')
+    player = Swordsman(name, 100, 30)
+    def fight(target):
+        while (player.health <= 0) or (target.health <= 0):
+            target.health -= player.damage
+            player.health -= target.damage
+            time.sleep(2)
+            if player.health <= 0:
+                print('Ты мертв.')
+
+
+    print('ты пошел нашел врага')
+    monster = Swordsman('Слайм',30, 10)
+    player.swordsman_attack(monster)
+    print('ты пришел в город тебя попросили зачистить данж'
+          'ты пошел в данж')
+
 
 
 
 
 
 main_story()
-

@@ -54,9 +54,10 @@ class Swordsman(Character):
             print(f'{self.name} мертв.')
         self.monster_kill(target)
 class Mage(Character):
-    def __init__(self,name,health,mana):
+    def __init__(self,name,health,mana,damage):
         super().__init__(name,health)
         self.mana = mana
+        self.damage = damage
 
     def mage_attack(self):
         if self.health > 0:
@@ -104,48 +105,70 @@ class Item():
         self.name = name
         self.value = value
 
+item1 = Item('Яблоко', 5)
 
-
-
-
-
-
-
-
-
-#person1 = Character('Аято',100)
 #swordsman1 = Swordsman('Райден',100,20)
 #mage1 = Mage('Эмилия',80,100)
 #cleymor1 = Cleymor('Итто',150,75,1)
 #archer1 = Archer('Фишль',75,80,50)
 
 
-
+player_live = True
 def main_story():
+
     print('Путешествуя по различным мирам,ты попал в мир,именуемый как Тейват.')
     print('Но однажды,в нем началась катастрофа. Желая покинуть его,на границе с небесами тебе заградило путь Божество. Твои силы не могли сравниться с силами Безымяной Богини,и ты проиграл.')
     print('Очнувшись спустя время,ты не обнаружил ни своего врага,ни разрушений,вызваными катастрофой,ни своих сил и умений.Сколько лет прошло,где твои силы,и как тебе выбраться? Пусть за это время,твое имя навсегда останется в истории этого мира.')
     name = input('Введи свое имя')
-    print(f'Тебя зовут {name}. Ты - Мечник!')
-    player = Swordsman(name, 100, 30)
+    print('К чему лежет твоя душа? Выбери цифру')
+    player_class = int(input('1) Мечник 2) Стрелок 3) Маг'))
+    if player_class == 1:
+        player = Swordsman(name, 120, 30)
+    if player_class == 2:
+        player = Archer(name, 90, 30, 50)
+    if player_class == 3:
+        player = Mage(name, 100, 100, 35)
+#---------------------------------------------------------------------------------------------------
     def fight(target):
-        while (player.health <= 0) or (target.health <= 0):
+        if player_class == 2:
+            num = random.randint(0,100)
+            if num <= player.accuracy:
+                player.damage = player.damage * 1.3
+            else:
+                player.damage = player.damage
+
+        if player_class == 3:
+            num = int(input('Сколько маны потратить?'))
+            mana_mnozitel = num // 10
+            player.damage = player.damage * mana_mnozitel
+        while (player.health > 0) or (target.health >0):
             target.health -= player.damage
-            player.health -= target.damage
-            time.sleep(2)
+            print(f'Ты атакуешь {target.name}! У {target.name} осталось {target.health} HP')
             if player.health <= 0:
-                print('Ты мертв.')
+                print('Ты погиб')
+                player_live = False
+                break
+            player.health -= target.damage
+            print(f'{target.name} атакует тебя! У тебя осталось {player.health} HP')
+            if target.health <= 0:
+                print(f'{target.name} мертв')
+                break
+            time.sleep(2)
+#--------------------------------------------------------------------------------------------------
+
+    print('Ты проснулся на берегу моря. Отправляйся в лес!')
+    print('В лесу ты встретил врага - Слайма!')
+    monster1 = Swordsman('Слайм',100, 10)
+    fight(target=monster1)
+    player.take_item(item1.name)
+    print('Со слайма тебе выпало яблоко! Это хороший способ получать ресурсы.')
+    time.sleep(4)
+    print('Ты отправился дальше. Ты пришел в город ветра - Мондштадт.Каждый город в этом мире подчиняется Архонтам 7 элементов природы.')
 
 
-    print('ты пошел нашел врага')
-    monster = Swordsman('Слайм',30, 10)
-    player.swordsman_attack(monster)
-    print('ты пришел в город тебя попросили зачистить данж'
-          'ты пошел в данж')
 
 
 
 
-
-
-main_story()
+while player_live == True:
+    main_story()

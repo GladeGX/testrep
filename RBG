@@ -1,0 +1,20 @@
+import pygame as pg
+#голова
+scr = pg.display.set_mode((600, 600))
+scr.fill((255,255,255))
+pg.draw.rect(scr, (204,153,255), (200,20,35,85))
+pg.draw.rect(scr, (204,153,255), (400,20,35,85))
+pg.draw.rect(scr, (153,0,153), (180,105,275,100))
+pg.draw.rect(scr, (255,255,255), (200,125,42,42))
+pg.draw.rect(scr, (255,255,255), (375,125,42,42))
+pg.draw.rect(scr, (0,0,0), (200,140,25,27))
+pg.draw.rect(scr, (0,0,0), (375,140,25,27))
+pg.draw.rect(scr, (255,0,0), (190,177,230,21))
+#туловище
+pg.draw.rect(scr, (204,153,255), (150,205,345,240))
+#руки
+pg.draw.rect(scr, (153,0,153), (90,205,60,180))
+
+while True:
+    pg.display.flip()
+

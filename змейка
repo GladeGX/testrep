@@ -1,26 +1,69 @@
 import pygame as pg
 import time
+import random
 scr = pg.display.set_mode((800,800))
 x = 60
 y = 20
 xsp = 20
 ysp = 0
-
+appleSize = 20
+xA = random.randint(0, 780)//appleSize * appleSize
+yA = random.randint(0, 780)//appleSize * appleSize
 xTail = [20, 40]
 yTail = [0, 0]
 lenght = 2
+appleChetchik = 0
 
 
+loose = False
 while True:
+# создание фигур
     time.sleep(0.2)
     scr.fill((255, 255, 255))
-    pg.draw.rect(scr, (255, 0, 0), (x, y, 20, 20))
+    pg.draw.rect(scr, (0, 255, 0), (x, y, 20, 20))
+    pg.draw.rect(scr, (255, 0, 0), (xA, yA, appleSize, appleSize))
     for i in  range(-1, -lenght-1, -1):
-        pg.draw.rect(scr, (255, 0, 0), (xTail[i], yTail[i], 20, 20))
+        pg.draw.rect(scr, (0, 255, 0), (xTail[i], yTail[i], 20, 20))
+        if x == xTail[i] and y == yTail[i]:
+            loose = True
+# поедание яблок
+    if x == xA and y == yA:
+        lenght += 1
+        xA = random.randint(0, 780) // appleSize * appleSize
+        yA = random.randint(0, 780) // appleSize * appleSize
+#        winChanse=random.randint(1,5)
+#        if winChanse == 5:
+#            exit()
+        appleChetchik += 1
+        if appleChetchik == 3:
+            appleSize = 40
+            appleChetchik = 0
+        else:
+            appleSize = 20
 
-    x += xsp
-    y += ysp
 
+
+#цикл поражения
+    while loose:
+        scr.fill((255,0,0))
+        for i in pg.event.get():
+            if i.type == pg.QUIT:
+                exit()
+            if i.type == pg.KEYDOWN:
+                x = 60
+                y = 20
+                xsp = 20
+                ysp = 0
+                xA = random.randint(0, 780) // 20 * 20
+                yA = random.randint(0, 780) // 20 * 20
+                xTail = [20, 40]
+                yTail = [0, 0]
+                lenght = 2
+                appleChetchik = 0
+                appleSize = 20
+                loose = False
+        pg.display.flip()
+# реакция на кнопки, управление
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()
@@ -40,6 +83,8 @@ while True:
 
     xTail.append(x)
     yTail.append(y)
+    x += xsp
+    y += ysp
     if x > 800:
         x = 0
     if x < 0:

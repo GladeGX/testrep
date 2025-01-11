@@ -1,17 +1,26 @@
 import pygame as pg
 import time
 scr = pg.display.set_mode((800,800))
-x = 20
+x = 60
 y = 20
 xsp = 20
 ysp = 0
+
+xTail = [20, 40]
+yTail = [0, 0]
+lenght = 2
+
 
 while True:
     time.sleep(0.2)
     scr.fill((255, 255, 255))
     pg.draw.rect(scr, (255, 0, 0), (x, y, 20, 20))
+    for i in  range(-1, -lenght-1, -1):
+        pg.draw.rect(scr, (255, 0, 0), (xTail[i], yTail[i], 20, 20))
+
     x += xsp
     y += ysp
+
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()
@@ -29,6 +38,8 @@ while True:
                 xsp = 0
                 ysp = 20
 
+    xTail.append(x)
+    yTail.append(y)
     if x > 800:
         x = 0
     if x < 0:
@@ -39,29 +50,3 @@ while True:
         y = 800
 
     pg.display.flip()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

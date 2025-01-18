@@ -1,0 +1,22 @@
+import pygame as pg
+pg.init()
+scr = pg.display.set_mode((800,800))
+fon = pg.image.load('fon.png')
+fon = pg.transform.scale(fon, (800,800))
+dom = pg.image.load('House.png')
+dom = pg.transform.scale(dom, (300,300))
+mug = pg.image.load('Mug.png')
+mug = pg.transform.scale(mug,(300,500))
+while True:
+    scr.blit(fon, (0,0))
+    scr.blit(dom, (200,370))
+    scr.blit(mug, (100,200))
+    gradus = 0
+    gradus += 1
+    mug = pg.transform.rotate(mug,gradus)
+
+
+    for i in pg.event.get():
+        if i.type == pg.QUIT:
+            exit()
+    pg.display.flip()

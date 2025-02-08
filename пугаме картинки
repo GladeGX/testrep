@@ -1,51 +1,79 @@
-import  pygame as pg
+import pygame as pg
 import time
+
 pg.init()
 
 class SimppleMan():
     def __init__(self):
-        self.spisok_kadrov = [pg.image.load('Idle1.png'),
-                              pg.image.load('Idle2.png'),
-                              pg.image.load('Idle3.png'),
-                              pg.image.load('Idle4.png'),
-                              pg.image.load('Idle5.png'),
-                              pg.image.load('Idle6.png'),
-                              pg.image.load('Idle7.png'),
-                              pg.image.load('Idle8.png')]
-        
-        self.spisok_animok = [pg.image.load('Idle1.png'),
-                              pg.image.load('Idle2.png'),
-                              pg.image.load('Idle3.png'),
-                              pg.image.load('Idle4.png'),
-                              pg.image.load('Idle5.png'),
-                              pg.image.load('Idle6.png'),
-                              pg.image.load('Idle7.png'),
-                              pg.image.load('Idle8.png')]
+        self.spisok_kadrov = [pg.image.load('idle1.png'),
+                              pg.image.load('idle2.png'),
+                              pg.image.load('idle3.png'),
+                              pg.image.load('idle4.png'),
+                              pg.image.load('idle5.png'),
+                              pg.image.load('idle6.png'),
+                              pg.image.load('idle7.png'),
+                              pg.image.load('idle8.png')]
+
+        self.spisok_animok = [pg.image.load('Run1.png'),
+                              pg.image.load('Run2.png'),
+                              pg.image.load('Run3.png'),
+                              pg.image.load('Run4.png'),
+                              pg.image.load('Run5.png'),
+                              pg.image.load('Run6.png'),
+                              pg.image.load('Run7.png'),
+                              pg.image.load('Run8.png')]
+        self.spisok_animok_left = [pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('Run1.png'), True, False)]
+
         self.x = 200
         self.y = 200
         self.cadr = 0
         self.xsp = 0
-    def update(self,scr):
+
+    def control(self,event):
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_RIGHT:
+                self.xsp = 10
+        if event.type == pg.KEYUP:
+            if event.key == pg.K_RIGHT:
+                self.xsp = 0
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_LEFT:
+                self.xsp = -10
+        if event.type == pg.KEYUP:
+            if event.key == pg.K_LEFT:
+                self.xsp = 0
+
+    def update(self, scr):
+        if self.xsp == 0:
+            scr.blit(self.spisok_kadrov[self.cadr],(self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
+        if self.xsp > 0:
+            scr.blit(self.spisok_animok[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
+        if self.xsp < 0:
+            scr.blit(self.spisok_animok_left[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
         self.cadr += 1
         if self.cadr > 7:
             self.cadr = 0
-        scr.blit(self.spisok_kadrov[self.cadr], (self.x, self.y))
-        if i.type == pg.KEYDOWN:
-            if i.key == pg.K_d:
-                self.xsp = 5
-        if i.type == pg.KEYUP:
-            if i.key == pg.K_d:
-                self.xsp = 0
-                
+        self.x += self.xsp
+
         return scr
+
 
 mag = SimppleMan()
 scr = pg.display.set_mode((800, 600))
 while True:
-    scr.fill((0,0,0))
+    scr.fill((0, 0, 0))
     scr = mag.update(scr)
     time.sleep(0.1)
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()
+        else:
+            mag.control(i)
     pg.display.flip()

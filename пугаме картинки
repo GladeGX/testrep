@@ -12,14 +12,31 @@ class SimppleMan():
                               pg.image.load('Idle6.png'),
                               pg.image.load('Idle7.png'),
                               pg.image.load('Idle8.png')]
+        
+        self.spisok_animok = [pg.image.load('Idle1.png'),
+                              pg.image.load('Idle2.png'),
+                              pg.image.load('Idle3.png'),
+                              pg.image.load('Idle4.png'),
+                              pg.image.load('Idle5.png'),
+                              pg.image.load('Idle6.png'),
+                              pg.image.load('Idle7.png'),
+                              pg.image.load('Idle8.png')]
         self.x = 200
         self.y = 200
         self.cadr = 0
+        self.xsp = 0
     def update(self,scr):
         self.cadr += 1
         if self.cadr > 7:
             self.cadr = 0
         scr.blit(self.spisok_kadrov[self.cadr], (self.x, self.y))
+        if i.type == pg.KEYDOWN:
+            if i.key == pg.K_d:
+                self.xsp = 5
+        if i.type == pg.KEYUP:
+            if i.key == pg.K_d:
+                self.xsp = 0
+                
         return scr
 
 mag = SimppleMan()
@@ -28,7 +45,7 @@ while True:
     scr.fill((0,0,0))
     scr = mag.update(scr)
     time.sleep(0.1)
+    for i in pg.event.get():
+        if i.type == pg.QUIT:
+            exit()
     pg.display.flip()
-
-
-

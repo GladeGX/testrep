@@ -14,14 +14,14 @@ class SimppleMan():
                               pg.image.load('idle7.png'),
                               pg.image.load('idle8.png')]
 
-        self.spisok_kadrov_left = [pg.transform.flip(pg.image.load('idle1.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle2.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle3.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle4.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle5.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle6.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle7.png'), True , False),
-                                   pg.transform.flip(pg.image.load('idle8.png'), True , False)]
+        self.spisok_kadrov_left = [pg.transform.flip(pg.image.load('idle1.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle2.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle3.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle4.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle5.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle6.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle7.png'), True, False),
+                                   pg.transform.flip(pg.image.load('idle8.png'), True, False)]
 
         self.spisok_animok = [pg.image.load('Run1.png'),
                               pg.image.load('Run2.png'),
@@ -43,16 +43,18 @@ class SimppleMan():
 
         self.spisok_jump = [pg.image.load('Jump1.png'),
                             pg.image.load('Jump2.png')]
+        self.spisok_jump_left = [pg.transform.flip(pg.image.load('Jump1.png'), True, False),
+                                 pg.transform.flip(pg.image.load('Jump2.png'), True, False)]
 
-        self.x = 200
-        self.y = 200
+        self.x = 500
+        self.y = 500
         self.cadr = 0
         self.xsp = 0
         self.stand = True
         self.jump = False
         self.ysp = 10
 
-    def control(self,event):
+    def control(self, event):
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RIGHT:
                 self.xsp = 10
@@ -70,27 +72,33 @@ class SimppleMan():
         if event.type == pg.KEYDOWN and self.jump == False:
             if event.key == pg.K_SPACE:
                 self.jump = True
-
-
+                self.ysp = -10
 
     def update(self, scr):
-        if self.xsp == 0 and self.stand == True:
-            scr.blit(self.spisok_kadrov[self.cadr],(self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
-        if self.xsp == 0 and self.stand == False:
-            scr.blit(self.spisok_kadrov_left[self.cadr], (self.x-self.spisok_kadrov_left[self.cadr].get_size()[0] + 50, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
-        if self.xsp > 0:
+        if self.jump == True and self.stand == True:
+            scr.blit(self.spisok_jump[self.cadr%2], (self.x+50 - self.spisok_jump[self.cadr%2].get_size()[0], self.y - self.spisok_jump[self.cadr%2].get_size()[1]))
+        elif self.jump == True and self.stand == False:
+            scr.blit(self.spisok_jump_left[self.cadr%2], (self.x , self.y - self.spisok_jump_left[self.cadr%2].get_size()[1]))
+        elif self.xsp == 0 and self.stand == True:
+            scr.blit(self.spisok_kadrov[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
+        elif self.xsp == 0 and self.stand == False:
+            scr.blit(self.spisok_kadrov_left[self.cadr],(self.x - self.spisok_kadrov_left[self.cadr].get_size()[0] + 50 , (self.y - self.spisok_kadrov[self.cadr].get_size()[1])))
+        elif self.xsp > 0:
             scr.blit(self.spisok_animok[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
-        if self.xsp < 0:
+        elif self.xsp < 0:
             scr.blit(self.spisok_animok_left[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
-        if self.jump == True:
-
 
         self.cadr += 1
         if self.cadr > 7:
             self.cadr = 0
+        if self.y < 500:
+            self.ysp +=1
+        if self.y > 500:
+            self.jump = False
+            self.ysp = 0
+            self.y = 500
         self.x += self.xsp
         self.y += self.ysp
-        
 
         return scr
 
@@ -101,6 +109,7 @@ while True:
     scr.fill((0, 0, 0))
     scr = mag.update(scr)
     time.sleep(0.1)
+    pg.draw.rect(scr,(255,255,255),(0,500,800,300))
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

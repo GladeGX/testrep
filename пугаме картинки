@@ -46,7 +46,7 @@ class SimppleMan():
         self.spisok_jump_left = [pg.transform.flip(pg.image.load('Jump1.png'), True, False),
                                  pg.transform.flip(pg.image.load('Jump2.png'), True, False)]
 
-        self.x = 500
+        self.x = 120
         self.y = 500
         self.cadr = 0
         self.xsp = 0
@@ -84,9 +84,9 @@ class SimppleMan():
         elif self.xsp == 0 and self.stand == False:
             scr.blit(self.spisok_kadrov_left[self.cadr],(self.x - self.spisok_kadrov_left[self.cadr].get_size()[0] + 50 , (self.y - self.spisok_kadrov[self.cadr].get_size()[1])))
         elif self.xsp > 0:
-            scr.blit(self.spisok_animok[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
+            scr.blit(self.spisok_animok[self.cadr], (self.x, (self.y - self.spisok_kadrov[self.cadr].get_size()[1]) + 36))
         elif self.xsp < 0:
-            scr.blit(self.spisok_animok_left[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
+            scr.blit(self.spisok_animok_left[self.cadr], (self.x, (self.y - self.spisok_kadrov[self.cadr].get_size()[1]) + 36))
 
         self.cadr += 1
         if self.cadr > 7:
@@ -99,6 +99,12 @@ class SimppleMan():
             self.y = 500
         self.x += self.xsp
         self.y += self.ysp
+        if self.x > 750:
+            num = self.x - 750
+            self.x -= num
+        if self.x < 20:
+            num = 20 - self.x
+            self.x += num
 
         return scr
 
@@ -108,8 +114,10 @@ scr = pg.display.set_mode((800, 600))
 while True:
     scr.fill((0, 0, 0))
     scr = mag.update(scr)
-    time.sleep(0.1)
+    time.sleep(0.07)
     pg.draw.rect(scr,(255,255,255),(0,500,800,300))
+
+    pg.draw.rect(scr, (255,0,0), (400,450,200,50))
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

@@ -77,16 +77,22 @@ class SimppleMan():
     def update(self, scr):
         if self.jump == True and self.stand == True:
             scr.blit(self.spisok_jump[self.cadr%2], (self.x+50 - self.spisok_jump[self.cadr%2].get_size()[0], self.y - self.spisok_jump[self.cadr%2].get_size()[1]))
+            self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
         elif self.jump == True and self.stand == False:
             scr.blit(self.spisok_jump_left[self.cadr%2], (self.x , self.y - self.spisok_jump_left[self.cadr%2].get_size()[1]))
+            self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
         elif self.xsp == 0 and self.stand == True:
             scr.blit(self.spisok_kadrov[self.cadr], (self.x, self.y - self.spisok_kadrov[self.cadr].get_size()[1]))
+            self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
         elif self.xsp == 0 and self.stand == False:
             scr.blit(self.spisok_kadrov_left[self.cadr],(self.x - self.spisok_kadrov_left[self.cadr].get_size()[0] + 50 , (self.y - self.spisok_kadrov[self.cadr].get_size()[1])))
+            self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
         elif self.xsp > 0:
             scr.blit(self.spisok_animok[self.cadr], (self.x, (self.y - self.spisok_kadrov[self.cadr].get_size()[1]) + 36))
+            self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
         elif self.xsp < 0:
             scr.blit(self.spisok_animok_left[self.cadr], (self.x, (self.y - self.spisok_kadrov[self.cadr].get_size()[1]) + 36))
+            self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
 
         self.cadr += 1
         if self.cadr > 7:
@@ -108,16 +114,35 @@ class SimppleMan():
 
         return scr
 
+class Platforms():
+    def __init__(self,x,y,lenght,weight):
+        self.x = x
+        self.y = y
+        self.lenght = lenght
+        self.weight = weight
+    def update(self, scr):
+        pg.draw.rect(scr,(255,0,0),(self.x,self.y,self.lenght,self.weight))
+        return scr
+    def checkPos(self,x,y):
+        if x >= self.x and x <= self.x + self.lenght and y >= self.y and y <= self.y + self.weight:
+            return scr
+        else:
+            return False
+
 
 mag = SimppleMan()
+platforma = Platforms(500,450,100,50)
+
+
+
 scr = pg.display.set_mode((800, 600))
 while True:
     scr.fill((0, 0, 0))
     scr = mag.update(scr)
+    scr = platforma.update(scr)
     time.sleep(0.07)
     pg.draw.rect(scr,(255,255,255),(0,500,800,300))
 
-    pg.draw.rect(scr, (255,0,0), (400,450,200,50))
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

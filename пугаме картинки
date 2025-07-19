@@ -125,13 +125,15 @@ class Platforms():
         return scr
     def checkPos(self,x,y):
         if x >= self.x and x <= self.x + self.lenght and y >= self.y and y <= self.y + self.weight:
-            return scr
+            return self.y
         else:
             return False
 
 
+
 mag = SimppleMan()
 platforma = Platforms(500,450,100,50)
+
 
 
 
@@ -142,7 +144,12 @@ while True:
     scr = platforma.update(scr)
     time.sleep(0.07)
     pg.draw.rect(scr,(255,255,255),(0,500,800,300))
+    newY = platforma.checkPos(mag.x,mag.y)
 
+
+    if newY:
+        mag.y = newY
+        mag.jump = False
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

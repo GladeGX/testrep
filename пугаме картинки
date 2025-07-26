@@ -74,6 +74,7 @@ class SimppleMan():
                 self.jump = True
                 self.ysp = -10
 
+
     def update(self, scr):
         if self.jump == True and self.stand == True:
             scr.blit(self.spisok_jump[self.cadr%2], (self.x+50 - self.spisok_jump[self.cadr%2].get_size()[0], self.y - self.spisok_jump[self.cadr%2].get_size()[1]))
@@ -111,6 +112,10 @@ class SimppleMan():
         if self.x < 20:
             num = 20 - self.x
             self.x += num
+        if self.ysp != 10:
+            self.jump = True
+        if self.y >= 500:
+            self.jump = False
 
         return scr
 
@@ -124,7 +129,7 @@ class Platforms():
         pg.draw.rect(scr,(255,0,0),(self.x,self.y,self.lenght,self.weight))
         return scr
     def checkPos(self,x,y):
-        if x >= self.x and x <= self.x + self.lenght and y >= self.y and y <= self.y + self.weight:
+        if x >= self.x -36 and x <= self.x + self.lenght and y >= self.y and y <= self.y + self.weight:
             return self.y
         else:
             return False
@@ -133,23 +138,30 @@ class Platforms():
 
 mag = SimppleMan()
 platforma = Platforms(500,450,100,50)
-
-
-
+platforma2 = Platforms(300, 370,100,50)
+platforma3 = Platforms(100, 290,100,50)
 
 scr = pg.display.set_mode((800, 600))
 while True:
     scr.fill((0, 0, 0))
     scr = mag.update(scr)
     scr = platforma.update(scr)
+    scr = platforma2.update(scr)
+    scr = platforma3.update(scr)
     time.sleep(0.07)
     pg.draw.rect(scr,(255,255,255),(0,500,800,300))
     newY = platforma.checkPos(mag.x,mag.y)
+    newY2 = platforma2.checkPos(mag.x,mag.y)
+    newY3 = platforma3.checkPos(mag.x, mag.y)
+    def noviyIgrek(newIgrek):
+        if newIgrek:
+            mag.y = newIgrek
+            mag.jump = False
+            mag.ysp = 0
 
-
-    if newY:
-        mag.y = newY
-        mag.jump = False
+    noviyIgrek(newY)
+    noviyIgrek(newY2)
+    noviyIgrek(newY3)
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

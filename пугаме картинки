@@ -46,7 +46,7 @@ class SimppleMan():
         self.spisok_jump_left = [pg.transform.flip(pg.image.load('Jump1.png'), True, False),
                                  pg.transform.flip(pg.image.load('Jump2.png'), True, False)]
 
-        self.x = 120
+        self.x = 50
         self.y = 500
         self.cadr = 0
         self.xsp = 0
@@ -134,12 +134,31 @@ class Platforms():
         else:
             return False
 
+class Coins():
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    def update(self,scr):
+        pg.draw.circle(scr,(122,119,31),(self.x,self.y), 25)
+        return scr
+    def lutCoin(self,x,y):
+        if x >= self.x - 25 and x <= self.x + 25 and y >= self.y :
+            self.x = 1000
+            self.y = 1000
+
+
+
+
+
 
 
 mag = SimppleMan()
-platforma = Platforms(500,450,100,50)
+platforma = Platforms(100,450,100,50)
 platforma2 = Platforms(300, 370,100,50)
-platforma3 = Platforms(100, 290,100,50)
+platforma3 = Platforms(500, 290,100,50)
+coin1 = Coins(150,420)
+coin2 = Coins(350,340)
+coin3 = Coins(550,260)
 
 scr = pg.display.set_mode((800, 600))
 while True:
@@ -148,7 +167,11 @@ while True:
     scr = platforma.update(scr)
     scr = platforma2.update(scr)
     scr = platforma3.update(scr)
+    scr = coin1.update(scr)
+    scr = coin2.update(scr)
+    scr = coin3.update(scr)
     time.sleep(0.07)
+
     pg.draw.rect(scr,(255,255,255),(0,500,800,300))
     newY = platforma.checkPos(mag.x,mag.y)
     newY2 = platforma2.checkPos(mag.x,mag.y)
@@ -162,6 +185,10 @@ while True:
     noviyIgrek(newY)
     noviyIgrek(newY2)
     noviyIgrek(newY3)
+
+    coin1.lutCoin(mag.x, mag.y)
+    coin2.lutCoin(mag.x, mag.y)
+    coin3.lutCoin(mag.x, mag.y)
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

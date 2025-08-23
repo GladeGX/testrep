@@ -53,7 +53,7 @@ class SimppleMan():
         self.stand = True
         self.jump = False
         self.ysp = 10
-
+#функция восприятия кнопок
     def control(self, event):
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RIGHT:
@@ -74,7 +74,7 @@ class SimppleMan():
                 self.jump = True
                 self.ysp = -10
 
-
+#функция реакции на нажатие кнопок
     def update(self, scr):
         if self.jump == True and self.stand == True:
             scr.blit(self.spisok_jump[self.cadr%2], (self.x+50 - self.spisok_jump[self.cadr%2].get_size()[0], self.y - self.spisok_jump[self.cadr%2].get_size()[1]))
@@ -94,7 +94,7 @@ class SimppleMan():
         elif self.xsp < 0:
             scr.blit(self.spisok_animok_left[self.cadr], (self.x, (self.y - self.spisok_kadrov[self.cadr].get_size()[1]) + 36))
             self.checkDown = ((self.x, self.y), (self.x + 66, self.y))
-
+#кадры,граница мира,пол
         self.cadr += 1
         if self.cadr > 7:
             self.cadr = 0
@@ -139,56 +139,66 @@ class Coins():
         self.x = x
         self.y = y
     def update(self,scr):
-        pg.draw.circle(scr,(122,119,31),(self.x,self.y), 25)
+        pg.draw.circle(scr,(251, 255, 8),(self.x,self.y), 25)
         return scr
     def lutCoin(self,x,y):
-        if x >= self.x - 25 and x <= self.x + 25 and y >= self.y :
+        if x >= self.x - 25 and x <= self.x + 25 and y <= self.y + 50:
             self.x = 1000
             self.y = 1000
 
-
-
-
-
-
-
+#создание объектов
 mag = SimppleMan()
 platforma = Platforms(100,450,100,50)
 platforma2 = Platforms(300, 370,100,50)
 platforma3 = Platforms(500, 290,100,50)
+platforma4 = Platforms(300, 210,100,50)
+platforma5 = Platforms(100, 130,100,50)
 coin1 = Coins(150,420)
 coin2 = Coins(350,340)
 coin3 = Coins(550,260)
+coin4 = Coins(350,180)
+coin5 = Coins(150,100)
 
 scr = pg.display.set_mode((800, 600))
 while True:
+#прорисовка кадров
     scr.fill((0, 0, 0))
     scr = mag.update(scr)
     scr = platforma.update(scr)
     scr = platforma2.update(scr)
     scr = platforma3.update(scr)
+    scr = platforma4.update(scr)
+    scr = platforma5.update(scr)
     scr = coin1.update(scr)
     scr = coin2.update(scr)
     scr = coin3.update(scr)
+    scr = coin4.update(scr)
+    scr = coin5.update(scr)
     time.sleep(0.07)
 
     pg.draw.rect(scr,(255,255,255),(0,500,800,300))
-    newY = platforma.checkPos(mag.x,mag.y)
+    newY1 = platforma.checkPos(mag.x,mag.y)
     newY2 = platforma2.checkPos(mag.x,mag.y)
     newY3 = platforma3.checkPos(mag.x, mag.y)
+    newY4 = platforma4.checkPos(mag.x, mag.y)
+    newY5 = platforma5.checkPos(mag.x, mag.y)
     def noviyIgrek(newIgrek):
         if newIgrek:
             mag.y = newIgrek
             mag.jump = False
             mag.ysp = 0
-
-    noviyIgrek(newY)
+#передование значений в функции
+    noviyIgrek(newY1)
     noviyIgrek(newY2)
     noviyIgrek(newY3)
+    noviyIgrek(newY4)
+    noviyIgrek(newY5)
 
     coin1.lutCoin(mag.x, mag.y)
     coin2.lutCoin(mag.x, mag.y)
     coin3.lutCoin(mag.x, mag.y)
+    coin4.lutCoin(mag.x, mag.y)
+    coin5.lutCoin(mag.x, mag.y)
     for i in pg.event.get():
         if i.type == pg.QUIT:
             exit()

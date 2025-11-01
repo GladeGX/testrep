@@ -1,0 +1,122 @@
+import random
+list_varianti = ['камень','ножницы','бумага','губка','огонь','воздух','вода']
+num = input('Выкидывай знак')
+bot_vibor = random.choice(list_varianti)
+itogovay_kombinacia = [num,bot_vibor]
+
+win_kombinacii = [['камень','ножницы'],['камень','огонь'],['камень','губка'],
+                  ['огонь','ножницы'],['огонь','губка'],['огонь','бумага'],
+                  ['ножницы','губка'],['ножницы','бумага'],['ножницы','воздух'],
+                  ['губка','бумага'],['губка','воздух'],['губка','вода'],
+                  ['бумага','камень'],['бумага','воздух'],['бумага','вода'],
+                  ['воздух','огонь'],['воздух','камень'],['воздух','вода'],
+                  ['вода','ножницы'],['вода','огонь'],['вода','камень'],
+                  ]
+print(f'Компьютер выбрал {bot_vibor}')
+if itogovay_kombinacia in win_kombinacii:
+    print('Ты победил')
+elif num == bot_vibor:
+    print('Ничья')
+else:
+    print('Ты проиграл')
+
+
+import random
+list_varianti = ['камень','ножницы','бумага','губка','огонь','воздух','вода']
+num = input('Выкидывай знак')
+bot_vibor = random.choice(list_varianti)
+print(f'Компьютер выбрал {bot_vibor}')
+
+if num == 'камень' and bot_vibor == 'ножницы':
+    print('Ты победил')
+elif num == 'камень' and bot_vibor == 'огонь':
+    print('Ты победил')
+elif num == 'камень' and bot_vibor == 'губка':
+    print('Ты победил')
+elif num == 'огонь' and bot_vibor == 'ножницы':
+    print('Ты победил')
+elif num == 'огонь' and bot_vibor == 'губка':
+    print('Ты победил')
+elif num == 'огонь' and bot_vibor == 'бумага':
+    print('Ты победил')
+elif num == 'ножницы' and bot_vibor == 'губка':
+    print('Ты победил')
+elif num == 'ножницы' and bot_vibor == 'бумага':
+    print('Ты победил')
+elif num == 'ножницы' and bot_vibor == 'воздух':
+    print('Ты победил')
+elif num == 'губка' and bot_vibor == 'бумага':
+    print('Ты победил')
+elif num == 'губка' and bot_vibor == 'воздух':
+    print('Ты победил')
+elif num == 'губка' and bot_vibor == 'вода':
+    print('Ты победил')
+elif num == 'бумага' and bot_vibor == 'камень':
+    print('Ты победил')
+elif num == 'бумага' and bot_vibor == 'воздух':
+    print('Ты победил')
+elif num == 'бумага' and bot_vibor == 'вода':
+    print('Ты победил')
+elif num == 'воздух' and bot_vibor == 'огонь':
+    print('Ты победил')
+elif num == 'воздух' and bot_vibor == 'камень':
+    print('Ты победил')
+elif num == 'воздух' and bot_vibor == 'вода':
+    print('Ты победил')
+elif num == 'вода' and bot_vibor == 'ножницы':
+    print('Ты победил')
+elif num == 'вода' and bot_vibor == 'огонь':
+    print('Ты победил')
+elif num == 'вода' and bot_vibor == 'камень':
+    print('Ты победил')
+elif num == bot_vibor:
+    print('Ничья')
+else:
+    print('Ты проиграл')
+
+
+
+
+import random
+list_varianti = ['камень','ножницы','бумага']
+print('Камень,ножницы,бумага...')
+num1 = input('Выкидывай 1 знак')
+num2 = input('Выкидывай 2 знак')
+bot_num1 = random.choice(list_varianti)
+bot_num2 = random.choice(list_varianti)
+
+print('Компьютер выбрал '
+      f'{bot_num1} и {bot_num2}')
+print('')
+
+odna_ruka = input('Одна рука!')
+bot_choise_radnint = random.randint(1,2)
+if bot_choise_radnint == 1:
+    bot_choise = bot_num1
+else:
+    bot_choise = bot_num2
+
+
+# odna_ruka = знак пользователя
+# bot_choise = знак компьютера
+print(f'Компьютер выбрал {bot_choise}')
+itogovay_kombinacia = [odna_ruka,bot_choise]
+win_kombinacii = [['камень','ножницы'],['ножницы','бумага'],['бумага','камень']]
+if itogovay_kombinacia in win_kombinacii:
+    print('Ты победил')
+elif odna_ruka == bot_choise:
+    print('Ничья')
+else:
+    print('Ты проиграл')
+
+
+
+
+
+
+
+
+
+
+
+

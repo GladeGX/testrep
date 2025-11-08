@@ -1,0 +1,39 @@
+import random
+
+provoda_x = ['Красный', 'Синий','Зеленый','Желтый','Белый']
+provoda = []
+while provoda_x != []:
+    vibor = random.randint(0,len(provoda_x)-1)
+    provoda.append(provoda_x[vibor])
+    provoda_x.pop(vibor)
+
+print(f'Есть бомба с 5 проводами: {provoda[0]},{provoda[1]},{provoda[2]},{provoda[3]},{provoda[4]}')
+print('Только 1 провод...правильный. Вот что поможет тебе выбрать какой именно:')
+
+pravilniy_provod = random.randint(0,4)
+def podskazka1():
+    list = [0,1,2,3,4]
+    list.pop(pravilniy_provod)
+    return random.choice(list)
+def podskazka2():
+    list = [0,1,2,3,4]
+    list.pop(pravilniy_provod)
+    num1 = random.choice(list)
+    if pravilniy_provod > num1:
+        num2 = pravilniy_provod-num1
+        if num2 == 1:
+            return f'{}'
+        
+    if pravilniy_provod < num1:
+        num2 = num1 - pravilniy_provod
+        if num2 == 1:
+            return num2
+podskazki = [f'{provoda[podskazka1()]} не тот' ,]
+
+print(random.choice(podskazki))
+print(provoda[pravilniy_provod])
+reshenie = input('Выбирай какой резать')
+if reshenie == provoda[pravilniy_provod]:
+    print('Тебе повезло')
+else:
+    print('Тебе не повезло')

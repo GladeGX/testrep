@@ -1,0 +1,38 @@
+import tkinter as tk
+
+
+story = {'Сцена в отеле': {'text': 'У тебя в колоде зеленая 6 и красная 7.', 'choises': [('Выкинуть зеленую 6', 'Артем выйгрывает'),('Выкинуть красную 7','Твоя победа')]},
+         'Артем выйгрывает': {'text': 'Артем скидывает зеленую 9. Его рука пуста.', 'choises': [('Признать поражение','Выполнение желания Артема'),('Обвинить его в жульничестве','Спор с Артемом')]},
+         'Твоя победа': {'text': 'Артем берет карты. Спустя минуту ты пуст.', 'choises': [('Заставить Артема делать твою домашку','Ворчание Артема'),('Пожалеть его','Артем радуется')]}
+         }
+scene = 'Сцена в отеле'
+
+def update_scene():
+    a = story[scene]
+    label.config(text=a['text'])
+    b = a['choises']
+    button1.config(text=b[0][0])
+    button2.config(text=b[1][0])
+
+
+
+
+
+
+root = tk.Tk()
+root.title('Forsaken Hotel')
+root.resizable(False, False)
+root.state('zoomed')
+#root.overrideredirect(True)
+
+
+
+label = tk.Label(root, text = '', font = ('Arial', 30))
+label.place(x = 950, y = 1000)
+button1 = tk.Button(root, width=45, height=5)
+button2 = tk.Button(root, width=45, height=5)
+button1.place(x = 700, y = 900)
+button2.place(x = 1700, y = 900)
+
+update_scene()
+root.mainloop()

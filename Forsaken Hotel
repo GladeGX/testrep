@@ -1,5 +1,4 @@
 import pygame
-import time
 pygame.init()
 pygame.mixer.init()
 
@@ -33,9 +32,9 @@ story = [
 
     #глава 1 или же № 0
     [
-        ['Я люблю вкусненьки такие прям ам ам ам сисюличочки ммммм вкуснятина',Chiter_777,bg1, False],
-        ['2Глава 0',Siirgen,bg2, False],
-        ['3Глава 0', Chiter_777, bg1, False],
+        ['Я думаю, он пойдет с нами.',Chiter_777,bg1, False],
+        ['И ты правда думаешь, что это поможет? Артем не тот, кто согласится на это.',Siirgen,bg2, False],
+        ['Я все же считаю, что он согласится. Думаю, можно его подкупить. ало ало ало ало ало ало ало ало ало', Chiter_777, bg1, False],
         ['4Глава 0', Siirgen, bg2, True],
     ],
 
@@ -73,7 +72,7 @@ story = [
 
    #глава 3.3 или же №5
    [
-       ['Глава 5', Glade, bg2, False],
+       ['Глава 5ffffffffffffffffff ffffffffffffffffffffff ffffffffffffffffffffffffffff ', Glade, bg2, False],
        ['2Глава 5', Siirgen, bg1, False],
        ['3Глава 5', Glade, bg2, False],
        ['4Глава 5 ', Siirgen, bg1, False],
@@ -90,33 +89,26 @@ story = [
 ]
 
 
-#def typewriter_effect(start_text):
-#    full_text = ''
-#    for i in start_text:
-#        full_text += i
-#        num = font.render()
+
 
 
 def line_transfer(start_text):
     words = start_text.split(' ')
     string = ''
     indent = 550
-    while True:
-        for i in words:
-            if font.size(string + i)[0] < max_px:
-                string += i
-                string += ' '
-            else:
-                string_ready = font.render(string,False,'White')
-                screen.blit(string_ready, (360, indent))
-                indent += 40
-                string = ''
-                string += i
-                string += ' '
+    for i in words:
+        if font.size(string + i)[0] < max_px:
+            string += i
+            string += ' '
+        else:
             string_ready = font.render(string,False,'White')
-            #typewriter_effect(string_ready)
-            #screen.blit(string_ready, (360, indent))
-        break
+            screen.blit(string_ready, (360, indent))
+            indent += 40
+            string = ''
+            string += i
+            string += ' '
+        string_ready = font.render(string,False,'White')
+        screen.blit(string_ready, (360, indent))
 
 
 #активные переменные
@@ -126,6 +118,7 @@ cnt = 1
 cnt_chapter = 0
 text = story[0][0][0]
 max_px = 816
+
 
 
 running = True
@@ -139,9 +132,9 @@ while running:
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
+
             # Получаем текущую сцену
             current_scene = story[cnt_chapter][cnt - 1]
-
             if current_scene[3] == True:  # Есть выбор
                 if event.key == pygame.K_1:
                     # Обработка выбора 1

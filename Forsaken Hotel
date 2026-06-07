@@ -8,23 +8,23 @@ HEIGHT = screen.get_height() #864
 
 #текст: левая граница - 360 правая граница - 1176
 font = pygame.font.Font('Saxonia Antiqua Bold.ttf', 40)
-frame = pygame.image.load('images/Рамка.png')
+frame = pygame.image.load('images bg/Рамка.png')
 
 #звуки
 click_sound = pygame.mixer.Sound('клик.mp3')
 
 #задние фоны
-bg_alpha1 = pygame.image.load('images/Пентограмм сити.jpg')
+bg_alpha1 = pygame.image.load('images bg/Отель холл.jpg')
 bg1 = pygame.transform.scale(bg_alpha1, (WIDTH, HEIGHT))
-bg_alpha2 = pygame.image.load('images/кафе.jpg')
+bg_alpha2 = pygame.image.load('images bg/кафе.jpg')
 bg2 = pygame.transform.scale(bg_alpha2, (WIDTH, HEIGHT))
 
 #персонажи
-Chiter_777 = pygame.image.load('images/Chiter777.png').convert_alpha()
+Chiter_777 = pygame.image.load('images character/Chiter777.png').convert_alpha()
 Chiter_777 = pygame.transform.scale(Chiter_777, (900, 900))
-Siirgen = pygame.image.load('images/Siirgen.png').convert_alpha()
+Siirgen = pygame.image.load('images character/Siirgen.png').convert_alpha()
 Siirgen = pygame.transform.scale(Siirgen, (900, 900))
-Glade = pygame.image.load('images/Glade.png').convert_alpha()
+Glade = pygame.image.load('images character/Glade.png').convert_alpha()
 Glade = pygame.transform.scale(Glade, (900, 900))
 
 #сюжет
@@ -32,10 +32,11 @@ story = [
 
     #глава 1 или же № 0
     [
-        ['Я думаю, он пойдет с нами.',Chiter_777,bg1, False],
-        ['И ты правда думаешь, что это поможет? Артем не тот, кто согласится на это.',Siirgen,bg2, False],
-        ['Я все же считаю, что он согласится. Думаю, можно его подкупить. ало ало ало ало ало ало ало ало ало', Chiter_777, bg1, False],
-        ['4Глава 0', Siirgen, bg2, True],
+        ['Да у него точно зеленая!',Chiter_777,bg1, False],
+        ['Нет у него зеленой, отвечаю, это красная смена хода.',Siirgen,bg1, False],
+        ['Откуда у тебя инфа, что у него смена хода?', Glade, bg1, False],
+        ['Он ее выкинул еще тогда, когда говорил что собрал фулл колоду из плюс два.', Chiter_777, bg1, False],
+        ['Это был блок хода.', Siirgen, bg2, True],
     ],
 
     #глава 2.1 или же № 1

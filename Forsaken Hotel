@@ -7,84 +7,301 @@ WIDTH = screen.get_width() #1536
 HEIGHT = screen.get_height() #864
 
 #текст: левая граница - 360 правая граница - 1176
-font = pygame.font.Font('Saxonia Antiqua Bold.ttf', 40)
-frame = pygame.image.load('images bg/Рамка.png')
+font = pygame.font.Font('Other/Pangolin-Regular.ttf', 40)
+frame_true = pygame.image.load('Other/рамка крутая.png')
+frame_true = pygame.transform.scale(frame_true, (WIDTH, HEIGHT))
+png_empty = pygame.image.load('Other/пнг пустое.png').convert_alpha()
+
 
 #звуки
-click_sound = pygame.mixer.Sound('клик.mp3')
-
-#задние фоны
-bg_alpha1 = pygame.image.load('images bg/Отель холл.jpg')
-bg1 = pygame.transform.scale(bg_alpha1, (WIDTH, HEIGHT))
-bg_alpha2 = pygame.image.load('images bg/кафе.jpg')
-bg2 = pygame.transform.scale(bg_alpha2, (WIDTH, HEIGHT))
+click_sound = pygame.mixer.Sound('sound/Клик.wav')
 
 #персонажи
-Chiter_777 = pygame.image.load('images character/Chiter777.png').convert_alpha()
-Chiter_777 = pygame.transform.scale(Chiter_777, (900, 900))
-Siirgen = pygame.image.load('images character/Siirgen.png').convert_alpha()
-Siirgen = pygame.transform.scale(Siirgen, (900, 900))
-Glade = pygame.image.load('images character/Glade.png').convert_alpha()
-Glade = pygame.transform.scale(Glade, (900, 900))
+Chiter = pygame.image.load('images character/Читерша.png').convert_alpha()
+Chiter = pygame.transform.scale(Chiter, (700, 1100))
+Siirgen = pygame.image.load('images character/Сыр.png').convert_alpha()
+Siirgen = pygame.transform.scale(Siirgen, (700, 1100))
+Glade = pygame.image.load('images character/Глейд.png').convert_alpha()
+Glade = pygame.transform.scale(Glade, (700, 1100))
+Artem = pygame.image.load('images character/Артем.png').convert_alpha()
+Artem = pygame.transform.scale(Artem, (700, 1100))
+Aloner = pygame.image.load('images character/Артур.png').convert_alpha()
+Aloner = pygame.transform.scale(Aloner, (700, 1100))
+Bogdan = pygame.image.load('images character/Богдан.png').convert_alpha()
+Bogdan = pygame.transform.scale(Bogdan, (700, 1100))
+Danik = pygame.image.load('images character/Даник.png').convert_alpha()
+Danik = pygame.transform.scale(Danik, (700, 1100))
+Katya = pygame.image.load('images character/Катя.png').convert_alpha()
+Katya = pygame.transform.scale(Katya, (700, 1100))
+Kira = pygame.image.load('images character/Кира.png').convert_alpha()
+Kira = pygame.transform.scale(Kira, (700, 1100))
+Mark = pygame.image.load('images character/Марк.png').convert_alpha()
+Mark = pygame.transform.scale(Mark, (700, 1100))
+
+#задние фоны
+bg1 = pygame.image.load('images background/черный фон.jpg')
+bg1 = pygame.transform.scale(bg1, (WIDTH, HEIGHT))
+bg2 = pygame.image.load('images background/0.jpg')
+bg2 = pygame.transform.scale(bg2, (WIDTH, HEIGHT))
+bg3 = pygame.image.load('images background/Урод.jpg')
+bg3 = pygame.transform.scale(bg3, (WIDTH, HEIGHT))
+bg4 = pygame.image.load('images background/14.67.jpg')
+bg4 = pygame.transform.scale(bg4, (WIDTH, HEIGHT))
+bg5 = pygame.image.load('images background/ты не нужен.jpg')
+bg5 = pygame.transform.scale(bg5, (WIDTH, HEIGHT))
+bg6 = pygame.image.load('images background/38.42.jpg')
+bg6 = pygame.transform.scale(bg6, (WIDTH, HEIGHT))
+bg7 = pygame.image.load('images background/проваливай.jpg')
+bg7 = pygame.transform.scale(bg7, (WIDTH, HEIGHT))
+bg8 = pygame.image.load('images background/67.37.jpg')
+bg8 = pygame.transform.scale(bg8, (WIDTH, HEIGHT))
+bg9 = pygame.image.load('images background/идиот.jpg')
+bg9 = pygame.transform.scale(bg9, (WIDTH, HEIGHT))
+bg10 = pygame.image.load('images background/88.95.jpg')
+bg10 = pygame.transform.scale(bg10, (WIDTH, HEIGHT))
+bg11 = pygame.image.load('images background/....jpg')
+bg11 = pygame.transform.scale(bg11, (WIDTH, HEIGHT))
+bg12 = pygame.image.load('images background/100.jpg')
+bg12 = pygame.transform.scale(bg12, (WIDTH, HEIGHT))
+bg13 = pygame.image.load('images background/отель издалека.jpg')
+bg13 = pygame.transform.scale(bg13, (WIDTH, HEIGHT))
+bg14 = pygame.image.load('images background/отель вблизи.jpg')
+bg14 = pygame.transform.scale(bg14, (WIDTH, HEIGHT))
+bg15 = pygame.image.load('images background/Холл отеля.jpg')
+bg15 = pygame.transform.scale(bg15, (WIDTH, HEIGHT))
+bg16 = pygame.image.load('images background/офис ви.jpg')
+bg16 = pygame.transform.scale(bg16, (WIDTH, HEIGHT))
+bg17 = pygame.image.load('images background/офис марка.jpeg')
+bg17 = pygame.transform.scale(bg17, (WIDTH, HEIGHT))
+bg18 = pygame.image.load('images background/рай.jpg')
+bg18 = pygame.transform.scale(bg18, (WIDTH, HEIGHT))
+bg19 = pygame.image.load('images background/тихое место.png')
+bg19 = pygame.transform.scale(bg19, (WIDTH, HEIGHT))
+bg20 = pygame.image.load('images background/стенка разговора.jpg')
+bg20 = pygame.transform.scale(bg20, (WIDTH, HEIGHT))
+bg21 = pygame.image.load('images background/башня ви.jpg')
+bg21 = pygame.transform.scale(bg21, (WIDTH, HEIGHT))
 
 #сюжет
 story = [
 
     #глава 1 или же № 0
     [
-        ['Да у него точно зеленая!',Chiter_777,bg1, False],
-        ['Нет у него зеленой, отвечаю, это красная смена хода.',Siirgen,bg1, False],
-        ['Откуда у тебя инфа, что у него смена хода?', Glade, bg1, False],
-        ['Он ее выкинул еще тогда, когда говорил что собрал фулл колоду из плюс два.', Chiter_777, bg1, False],
-        ['Это был блок хода.', Siirgen, bg2, True],
+        ['Space, чтобы продолжить',png_empty,bg1, 'Animation'],
+        ['',png_empty,bg1, 'Animation'],
+        ['',png_empty,bg2, 'Animation'],
+        ['',png_empty,bg3, 'Animation'],
+        ['',png_empty,bg4, 'Animation'],
+        ['',png_empty,bg5, 'Animation'],
+        ['',png_empty,bg6, 'Animation'],
+        ['',png_empty,bg7, 'Animation'],
+        ['',png_empty,bg8, 'Animation'],
+        ['',png_empty,bg9, 'Animation'],
+        ['',png_empty,bg10, 'Animation'],
+        ['',png_empty,bg11, 'Animation'],
+        ['',png_empty,bg12, 'Animation'],
+        ['',png_empty,bg1, 'Animation'],
+        ['',png_empty,bg13, 'Animation'],
+        ['',png_empty,bg14, 'Story'],
+        ['Да у него точно красная!',Chiter,bg15, 'Story'],
+        ['Нет у него зеленой, отвечаю, это красная смена хода.',Siirgen,bg15, 'Story'],
+        ['Откуда у тебя инфа, что у него смена хода?', Glade, bg15, 'Story'],
+        ['Да, он выкинул смену еще тогда, когда сказал что собрал колоду только из +2.', Danik, bg15, 'Story'],
+        ['Это был блок хода!', Siirgen, bg15, 'Story'],
+        ['...))))))', Artem, bg15, 'Story'],
+        ['У меня зеленая.', Artem, bg15, 'Story'],
+        ['...', Siirgen, bg15, 'Story'],
+        ['...', Glade, bg15, 'Story'],
+        ['...', Danik, bg15, 'Story'],
+        ['...', Chiter, bg15, 'Story'],
+        ['Зная Артема, у него наверно реально зеленая.', Chiter, bg15, 'Story'],
+        ['Да какая зеленая, он блефует.', Siirgen, bg15, 'Story'],
+        ['Если у него реально зеленая и мы сейчас проиграем, то ты... ', Chiter, bg15, 'Story'],
+        ['Читерша кидает зеленую 6', png_empty, bg15, 'Story'],
+        ['Артем скидывает последнюю карту, зеленую 7', png_empty, bg15, 'Story'],
+        ['ezz', Artem, bg15, 'Story'],
+        ['Сыр ты такой...', Chiter, bg15, 'Story'],
+        ['Зачем ты его послушалал?', Danik, bg15, 'Story'],
+        ['Из за вас двоих придеться идти с Артемом в его этот...кс. Потому что валорант для него видите ли слишком легкий.', Glade, bg15, 'Story'],
+        ['Открывается входная дверь', png_empty, bg15, 'Story'],
+        ['Вы слышали о новом убийстве?!', Katya, bg15, 'Story'],
+        ['Опять?', Glade, bg15, 'Story'],
+        ['...', Glade, bg15, 'Story'],
+        ['Это уже...67-е.', Glade, bg15, 'Story'],
+        ['Это лидер VVV, Бебрик.', Katya, bg15, 'Story'],
+        ['Че', Glade, bg15, 'Story'],
+        ['...', Chiter, bg15, 'Story'],
+        ['...', Siirgen, bg15, 'Story'],
+        ['...', Danik, bg15, 'Story'],
+        ['Неужели эт....Аэ-x, реально Бебрик?', Artem, bg15, 'Story'],
+        ['В городе сейчас только это и обсуждают.', Katya, bg15, 'Story'],
+        ['У него тоже сломаны все кости? Как у прошлых?', Danik, bg15, 'Story'],
+        ['Ага.', Katya, bg15, 'Story'],
+        ['Мне пора.', Artem, bg15, 'Story'],
+        ['Ты видел новости?', Artem, bg16, 'Story'],
+        ['Да. Это бред... Не может "он" обладать такой силой.', Bogdan, bg16, 'Story'],
+        ['Тут кто нибудь есть?', Chiter, bg17, 'Story'],
+        ['Бу', Mark, bg17, 'Story'],
+        ['Спустя пол часа', png_empty, bg17, 'Story'],
+        ['Поэтому я и считаю, что в моем отеле Хазбин можно спасать грешные души!', Chiter, bg17, 'Story'],
+        ['Эм...нет.', Mark, bg17, 'Story'],
+        ['И кстати, ждите истребление уже...через 5 минут!.', Mark, bg17, 'Story'],
+        ['И тогда Марк просто тказался. Вот козел. К тому же, в моем отелле по прежнем ни одного постояльца.', Chiter, bg15, 'Story'],
+        ['Нет идей, кто это может быть?', Artem, bg16, 'Story'],
+        ['Неа, но раз он так силен, что смог убить бебрика...', Bogdan, bg16, 'Story'],
+        ['Все, мой рабочий день тю-тю. Покеда.', Artem, bg16, 'Story'],
+        ['А что здесь происх...', Artem, bg14, 'Story'],
+        ['Стой...Прошу...НЕТ!', Mark, bg14, 'Story'],
+        ['1. Убить 2. Пощадить', png_empty, bg14, 'Choise'],
     ],
 
     #глава 2.1 или же № 1
     [
-        ['Глава 1',Glade,bg1,False],
-        ['2Глава 1',Chiter_777,bg2, False],
-        ['3Глава 1', Chiter_777, bg1, False],
-        ['4Глава 1', Siirgen, bg2, True],
+        ['...',Mark,bg14,'Story' ],
+        ['Ты...',Chiter,bg14, 'Story' ],
+        ['Что? Думаете, он не вставил бы нам нож в спину?', Danik, bg14, 'Story' ],
+        ['Он прав, Читерша.', Siirgen, bg14, 'Story'],
+        ['...Нет сейчас смысла думать об этом. Я тоже думаю, что так...будет лучше. Все же, это он пришел в наш город', Chiter, bg14, 'Story'],
+        ['А почему...истебление так быстро наступило снова?', Artem, bg14, 'Story'],
+        ['Спустя месяц', png_empty, bg14, 'Story'],
+        ['После убийства бебрика...убийства прекратились. Странно.', Glade, bg15, 'Story'],
+        ['Мне кажеться странным, что в той битве... Марк сражался  как-то слабо.', Danik, bg15, 'Story'],
+        ['Я думаю, надо наведаться в рай. С недавних пор проход туда открыт стабильно.', Katya, bg15, 'Story'],
+        ['Я пойду с тобой. Узнаем, что да как', Danik, bg15, 'Story'],
+        ['Погоди, это же...', Danik, bg18, 'Story'],
+        ['...', Kira, bg18, 'Story'],
+        ['Ты...Кира? Тебя сделали главнокомандующей после смерти Марка?', Danik, bg18, 'Story'],
+        ['Да. Не переживайте. У меня...нет скрытых мотивов из за того, что вы убили его...', Kira, bg18, 'Story'],
+        ['Вы хотели обсудить какие то проблемы? Давайте отойдем в более тихое место..', Kira, bg18, 'Story'],
+        ['Итак, в чем суть дела?', Kira, bg19, 'Story'],
+        ['Мы хотели бы узнать, знаете ли вы что о  тех убий...', Katya, bg19, 'Story'],
+        ['Кира подставляет ангельский клинок к шее Кати.', png_empty, bg19, 'Story'],
+        ['Что ты делаешь?!', Danik, bg19, 'Story'],
+        ['Думали, я прощу вам его смерть? Это ведь ты...Ты убил его.', Kira, bg19, 'Story'],
+        ['Тогда причем здесь она? Отпусти её, немедленно!', Danik, bg19, 'Story'],
+        ['О нет...Для тебя смерть была бы слишком легкой учестью...Я заставлю тебя испытать то, что чувствую я.', Kira, bg19, 'Story'],
+        ['В последний момент Даник делает рывок вперед, отталкиваю Катю, но сам попадает под удар', png_empty, bg19, 'Story'],
+        ['Нееет!', Katya, bg19, 'Story'],
+        ['Черт... 2 смерти мне не нужны. Забирай дружка, и проваливайте. Вам все равно никто не поверит', Kira, bg19, 'Story'],
+        ['Ты...Почему? Неужели, ты так жаждала мести?...', Katya, bg19, 'Story'],
+['Я сама поверить не могу...', Katya, bg15, 'Story'],
+['...', Chiter, bg15, 'Story'],
+['Читерша пошла к выходу', png_empty, bg15, 'Story'],
+['Куда ты?', Glade, bg15, 'Story'],
+['Пойду разберусь...с некоторыми делами...в раю.', Chiter, bg15, 'Story'],
+['Выходи. Твой тупой начальник много воды лил, вместо того чтобы слушать меня. Я знаю, что ты по вечерам в этом месте.', Chiter, bg19, 'Story'],
+['...', Kira, bg19, 'Story'],
+['Ты ведь не думаешь, что сможешь отомстить?', Kira, bg19, 'Story'],
+['1. "Были ли ты ему так нужна, как он тебе?" 2. "Да"', Chiter, bg19, 'Choise'],
     ],
 
     #глава 2.2 или же №2
     [
-        ['Глава 2',Glade,bg2,False ],
-        ['2Глава 2',Siirgen,bg1,False ],
-        ['3Глава 2', Glade, bg2, False],
-        ['4Глава 2', Siirgen, bg1, True],
+        ['Убирайся отсюда.', Danik, bg14, 'Story'],
+        ['Марк отозвал амрмию экзорцистов и покинул Форсакенс, закрыв за собой портал.', png_empty, bg14, 'Story'],
+        ['Мы...победили?', Chiter, bg14, 'Story'],
+        ['Надеюсь, он усвоил урок.', Siirgen, bg14, 'Story'],
+        ['А почему...истребление так быстро наступило снова?', Artem, bg14, 'Story'],
+        ['Спустя месяц', png_empty, bg14, 'Story'],
+        ['Глейд, мне тут передали, что тебя ждут в раю.', Chiter, bg15, 'Story'],
+['Ты...что то хотел?', Glade, bg17, 'Story'],
+['Я узнал, что ты раследуешь дело убийств. Раз уж я у вас в долгу, скажу тебе кое-что.', Mark, bg17, 'Story'],
+['Эти убийства - жертвоприношения. Я читал об этом.', Mark, bg17, 'Story'],
+['Древняя энергия спина, которой пользовались еще до рождения Земли. И появилась она вместе с адом. Вместо со злом. Как противовес злу.', Mark, bg17, 'Story'],
+['Это "зло" уже было запечатано спином. Но сейчас...кто то хочет распечатать его. Энергия спина позволяет выкручивать душу наизнанку.', Mark, bg17, 'Story'],
+['Это и приводит к тому, что у жертв сломаны кости, будто их перекосило.', Mark, bg17, 'Story'],
+['Большего я не знаю. Ясно одно, что какой то псих играет с огнем. Либо же, это "зло" отчасти вырвалось из клетки, заставляя свой сосуд освободить свою полную мощь.', Mark, bg17, 'Story'],
+['И кто же есть этот "сосуд", что совершает убийства?', Glade, bg17, 'Story'],
+['Тот, у кого хватило силы убить, как я понимаю, одного из сильнейших в аду. И кто распологал знаниями о спине.', Mark, bg17, 'Story'],
+['Ясно, спасибо', Glade, bg17, 'Story'],
+['Убийство бебрика...Тот, кто знает о спине...', Glade, bg15, 'Story'],
+['Прикинь, Артем рассказал, что видел у Богдана какой то блокнот, который исписан логотипами ДБД.', Siirgen, bg15, 'Story'],
+['Такое обычно используют, чтобы делать пометки. Это не авторский продукт ДБД идиот.', Glade, bg15, 'Story'],
+['Прикинь, Артем рассказал, что видел у Богдана какой то блокнот, который исписан логотипами ДБД.', Siirgen, bg15, 'Story'],
+['Ну сыр у нас такой, своеобразный. Как только увидел что то похожее на гейминг, сразу мозги отрубет, хаха.', Chiter, bg15, 'Story'],
+['Да завалитесь шкеты, и так весь день подкалываете.', Siirgen, bg15, 'Story'],
+['Артем, а сколько пометок там было?', Glade, bg15, 'Story'],
+['Тебе повезло, что они были очень рвоно и симетрично расположены. 3 ряда по 4, и еще +1. К тому же, еще одна была не закончена, на ней было 2 палочки.', Artem, bg15, 'Story'],
+['Так это же...67...А, что происходит?', Glade, bg15, 'Story'],
+['Все, хватит с меня. Задолбали рофлить. Всегда когда я прошу остановиться меня не слушают. Пока', Siirgen, bg15, 'Story'],
+['Да чего ты завелся?', Danik, bg15, 'Story'],
+['Погодите, я понял, убийца же Богдан?!', Glade, bg15, 'Story'],
+['Сыр уходит', png_empty, bg15, 'Story'],
+['1. Пойти за ним. 2. Остаться', Chiter, bg15, 'Choise'],
     ],
+
+
 
    #глава 3.1 или же №3
    [
-       ['Глава 3',Glade,bg2,False ],
-       ['2Глава 3',Siirgen,bg1,False ],
-       ['3Глава 3', Glade, bg2, False],
-       ['4Глава 3', Siirgen, bg1, False],
+       ['Ну...', Kira, bg19, 'Animation'],
+       ['', png_empty, bg19, 'Animation'],
+       ['', png_empty, bg1, 'Animation'],
+       ['', png_empty , bg15, 'Story'],
+       ['Стук в дверь.',png_empty,bg15,'Story' ],
+       ['Я открою.',Chiter,bg15,'Story' ],
+       ['Читерша открывает дверь', png_empty, bg15, 'Story'],
+       ['...', Kira, bg15, 'Story'],
+       ['...', Chiter, bg15, 'Story'],
+       [':)', Chiter, bg15, 'Story'],
+       ['Добро пожаловать в Отель Хазбин!', Chiter, bg15, 'Story'],
    ],
 
    #глава 3.2 или же №4
    [
-       ['Глава 4', Glade, bg2, False],
-       ['2Глава 4', Siirgen, bg1, False],
-       ['3Глава 4', Glade, bg2, False],
-       ['4Глава 4', Siirgen, bg1, False],
+       ['Читерша бросается в бой, и спустя несколько минут сражения, когда читерша почти победила...', png_empty, bg19, 'Story'],
+       ['А самой то...Что тебе принесет эта месть?', Kira, bg19, 'Story'],
+       ['...', Chiter, bg19, 'Story'],
+       ['Воспользовавшись своим мечом, Кира поканчивает с собой.', png_empty, bg19, 'Story'],
+       ['Стой...Нет, нет, нет!', Chiter, bg19, 'Story'],
+       ['Ты ведь...права.', Chiter, bg19, 'Animation'],
+       ['', png_empty, bg15, 'Story'],
+       ['Как ты?', Katya, bg15, 'Story'],
+       ['Думаю, я зря взяла ответственность за отель. Мне еще самой...надо понять, что добро, а что зло.', Chiter, bg15, 'Story'],
+       ['...Но это не значит, что надо отбрсоить свои цели. Мы с тобой', Siirgen, bg15, 'Story'],
+       ['Спасибо, что вы есть у меня, друзья...', Chiter, bg15, 'Story'],
    ],
 
    #глава 3.3 или же №5
    [
-       ['Глава 5ffffffffffffffffff ffffffffffffffffffffff ffffffffffffffffffffffffffff ', Glade, bg2, False],
-       ['2Глава 5', Siirgen, bg1, False],
-       ['3Глава 5', Glade, bg2, False],
-       ['4Глава 5 ', Siirgen, bg1, False],
+       ['Сыр, прости...Давай поговорим',Chiter , bg20, 'Story'],
+['спустя 15 минут',png_empty , bg20, 'Story'],
+['Ладно, я остыл. Прости, накипело.',Siirgen , bg20, 'Story'],
+['Ты прости. Ладно, я теперь пойдем обратно...Ты ведь тоже слышал?',Chiter , bg20, 'Story'],
+['Навстечу им выбегают Глейд с Артемом.',png_empty , bg20, 'Story'],
+['Нет времени объяснять, но не идите за нами. Это стелс задание',Glade , bg20, 'Story'],
+['Ты уверен, что нам стоит идти? У меня конракт с Богданом, да и он мутный тип. И раз он и есть убийца, то я его вдвойне боюсь.',Artem , bg21, 'Story'],
+['Я всегда понимал, что у вас...сложные отношения. Абьюз дело такое все дела...',Glade , bg21, 'Story'],
+['А кто это у нас тут идет? Неужели ты сдал меня, Артем?',Bogdan , bg21, 'Story'],
+['Рожу тебе сейчас начищу я. Ты получишь по заслугам, уби...',Glade , bg21, 'Story'],
+['Глейд взмыл в воздух из за силы райского древней истины.',png_empty , bg21, 'Story'],
+['А ты станешь 68. Аэ...что...',Bogdan , bg21, 'Story'],
+['Ты думаешь, я за все время не просек, как ты пользуешься катализатором для своего оружия?',Artem , bg21, 'Story'],
+['Богдан поднимается в воздух. Артем, использовав катализатор богдана, пропитаный энергией райской древней истины, использовал ее на богдане.',png_empty , bg21, 'Story'],
+['Богдан мертв.',png_empty , bg21, 'Story'],
+['Ужас...вот как он убивал. В любом случае, он получил по заслугам',Glade , bg21, 'Story'],
+['Это, оказываается, не так уж и сложно...и страшно. Слишком долго этот урод командовал мной.',Artem , bg21, 'Story'],
    ],
 
    # глава 3.4 или же №6
    [
-       ['Глава 6', Glade, bg2, False],
-       ['2Глава 6', Siirgen, bg1, False],
-       ['3Глава 6', Glade, bg2, False],
-       ['4Глава 6', Siirgen, bg1, False],
+['Забей, сам вернется',Danik, bg15, 'Story'],
+['Наконец то пришло время...Освободить его. Освободить зло. Освободить...Истязателя разума.',Bogdan , bg21, 'Story'],
+['На центральной площади появля.ются трещины, из которых вылетает нечто, похожее на тень. Но тень тут же вселяестя в мимо проходящего сыра.',png_empty , bg21, 'Story'],
+['Что, в мальчишку? Неужели истязатель...выбрал кого то лучше? Эй, ты, немедленно иди сюд...!',Bogdan , bg21, 'Story'],
+['Не успевает Богдан договорить, как моментально сгорает заживо от атаки сыра. Теперь ОН сосуд зла. Его обида оказалась сильнее жажды безумствия.',png_empty , bg21, 'Story'],
+['За мгновенье весь город погружается в хаос. В центр города выбежали Читерша и остальные.',png_empty , bg21, 'Story'],
+['Что...с ним?',Chiter , bg21, 'Story'],
+['...Вам....Конец...',Siirgen , bg21, 'Story'],
+['Сила истязателя слишком велика, чтобы даже всем вместе одолеть его.',png_empty , bg21, 'Story'],
+['Стой, сыр, это ведь... не ты. Прости...прости нас за то.',Chiter , bg21, 'Story'],
+['Уже поздно просить прощения.',Siirgen, bg21, 'Story'],
+['Глейд подкрадывается сзади чтобы нанести удар, но Читерша отражает атаку. В этот момент, внутри Сыра...', png_empty , bg21, 'Story'],
+['Нет...Это...мои друзья...Я не могу...',Siirgen , bg1, 'Animation'],
+['Можешь. Ты должен. Они - зло. Они сделали тебя таким.',png_empty , bg1, 'Story'],
+['Но я мог...просто уйти. Я мог прсото уйти. Это моя вина. А свою вину...они уже загладили.',Siirgen , bg1, 'Story'],
+['Его друзья не атакуют его, а просто ждут. Вдруг, Сыр начинает кричать, а Истязатель покидает его.',png_empty , bg21, 'Story'],
+['Остатком силы Сыр атакует истязателя, сжигая его дотла его же силой.',png_empty , bg21, 'Story'],
    ]
 
 ]
@@ -114,31 +331,30 @@ def line_transfer(start_text):
 
 #активные переменные
 bg = bg1
-character = Chiter_777
+character = png_empty
 cnt = 1
 cnt_chapter = 0
 text = story[0][0][0]
 max_px = 816
-
-
+frame = png_empty
 
 running = True
 while running:
 
     screen.blit(bg, (0,0))
-    screen.blit(character, (325, 0))
-    screen.blit(frame, (318, 550))
+    screen.blit(character, (400, -50))
+    screen.blit(frame, (0, 30))
     line_transfer(text)
 
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
 
-            # Получаем текущую сцену
+
             current_scene = story[cnt_chapter][cnt - 1]
-            if current_scene[3] == True:  # Есть выбор
+            if current_scene[3] == 'Choise':
                 if event.key == pygame.K_1:
-                    # Обработка выбора 1
+
                     story[cnt_chapter][cnt - 1][3] = False
                     if cnt_chapter == 0:
                         cnt_chapter = 1
@@ -146,14 +362,14 @@ while running:
                         cnt_chapter = 3
                     elif cnt_chapter == 2:
                         cnt_chapter = 5
-                    cnt = 0  # Сбрасываем для новой главы
+                    cnt = 0
                     bg = story[cnt_chapter][cnt][2]
                     character = story[cnt_chapter][cnt][1]
                     text = story[cnt_chapter][cnt][0]
                     cnt += 1
 
                 elif event.key == pygame.K_2:
-                    # Обработка выбора 2
+
                     story[cnt_chapter][cnt - 1][3] = False
                     if cnt_chapter == 0:
                         cnt_chapter = 2
@@ -167,36 +383,16 @@ while running:
                     text = story[cnt_chapter][cnt][0]
                     cnt += 1
 
-            else:  # Нет выбора
+            elif current_scene[3] == 'Story' or current_scene[3] == 'Animation': # Нет выбора
                 if event.key == pygame.K_SPACE:
                     click_sound.play()
                     bg = story[cnt_chapter][cnt][2]
                     character = story[cnt_chapter][cnt][1]
                     text = story[cnt_chapter][cnt][0]
                     cnt += 1
-
-
+                    frame = frame_true
+                if current_scene[3] == 'Animation':
+                    frame = png_empty
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
